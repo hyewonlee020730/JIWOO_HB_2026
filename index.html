@@ -10,6 +10,8 @@
   <meta property="og:title" content="지우야! 생일 축하해!!" />
   <meta property="og:description" content="지우의 생일을 기념해 만든 웹페이지" />
   <meta property="og:image" content="https://jiwoo-hb-2026.vercel.app/assets/thumbnail.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600&display=swap" rel="stylesheet">
   <style>
     @font-face {
       font-family: 'BMKkubulim';
@@ -285,6 +287,102 @@
 
     .section-3__btn:active .btn-bg  { fill: #D5DFE9; }
     .section-3__btn:active .btn-text { fill: #505050; }
+
+    /* Section 4 */
+    .section-4 {
+      background: var(--color-bg);
+    }
+
+    .section-4__frame {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px 0 calc(30px + env(safe-area-inset-bottom)) 0;
+    }
+
+    .section-4__text {
+      font-family: 'BMKkubulim', sans-serif;
+      font-size: var(--font-size-base);
+      line-height: 1.6;
+      color: #000;
+      white-space: pre-line;
+      text-align: center;
+    }
+
+    .section-4__card {
+      padding: 0 30px;
+      overflow: hidden;
+    }
+
+    .carousel {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .carousel__track {
+      display: flex;
+      will-change: transform;
+    }
+
+    .carousel__slide {
+      min-width: 100%;
+      flex-shrink: 0;
+    }
+
+    /* 사진 크기 기준: 1:1 정방형, 가로 = 캐러셀 너비(섹션 너비 - 좌우 패딩 60px) */
+    .carousel__slide__inner {
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%; /* 1:1 비율 강제 (구형 브라우저 호환) */
+    }
+
+    .carousel__slide__inner img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+    }
+
+    .year-chip {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 6px;
+      color: #fff;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 5px 10px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .section-4__bottom {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-4__tooltip {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 18px;
+      height: 80px;
+    }
+
+    .section-4__tooltip img {
+      display: block;
+      height: 32px;
+      width: auto;
+    }
+
   </style>
 </head>
 <body>
@@ -355,6 +453,70 @@
                 <path class="btn-bg" d="M0 18.0615C0 8.08642 8.08642 0 18.0615 0H737.692C747.667 0 755.754 8.08642 755.754 18.0615V81.2769C755.754 91.252 747.667 99.3384 737.692 99.3384H18.0615C8.0864 99.3384 0 91.252 0 81.2769V18.0615Z" fill="#D6EBFF"/>
                 <path class="btn-text" d="M349.572 57.4289V59.8674H324.261V57.4289H335.404V51.7494H327.163V37.5198H330.095V42.2733H343.676V37.5198H346.578V51.7494H338.306V57.4289H349.572ZM330.095 49.3727H343.676V44.65H330.095V49.3727ZM374.605 35.6369V63.3553H371.704V48.4775H366.641V46.039H371.704V35.6369H374.605ZM365.005 38.1371V48.0145H355.529V54.3113C359.943 54.2959 363.339 54.1416 367.197 53.4471L367.444 55.8547C363.308 56.5955 359.666 56.7498 354.789 56.7807H352.597V45.6378H362.166V40.5139H352.535V38.1371H365.005ZM400.441 35.6369V46.6564H404.731V49.0948H400.441V63.2627H397.508V35.6369H400.441ZM393.218 38.5384C393.187 46.5329 389.668 53.6631 380.562 58.1697L378.926 55.8856C385.856 52.4285 389.622 47.428 390.224 40.9769H380.315V38.5384H393.218ZM429.209 35.6369V63.2936H426.245V35.6369H429.209ZM420.967 38.6001C420.967 46.6872 417.51 53.7249 408.034 58.2623L406.491 55.8856C413.852 52.3822 417.433 47.3972 418.004 40.946H407.818V38.6001H420.967Z" fill="black"/>
               </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section section-4">
+        <div class="section-4__frame">
+          <div class="section-4__text">마지막으로 지금까지 쌓였던
+우리의 추억을 전달 할게</div>
+          <div class="section-4__card">
+            <div class="carousel" id="sec4Carousel">
+              <div class="carousel__track">
+                <!-- clone: last -->
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2025_05_01_01_03_IMG_4991 1.jpg" alt="" /><span class="year-chip">2025</span></div></div>
+                <!-- real slides -->
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2021_11_14_15_55_IMG_0068 1.jpg" alt="" /><span class="year-chip">2021</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2021_12_05_14_54_IMG_0224 1.jpg" alt="" /><span class="year-chip">2021</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2021_12_06_12_40_IMG_0304 1.jpg" alt="" /><span class="year-chip">2021</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2021_12_06_12_40_IMG_0305 1.jpg" alt="" /><span class="year-chip">2021</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2021_12_22_22_47_IMG_0415 1.jpg" alt="" /><span class="year-chip">2021</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2021_12_22_22_47_IMG_0419 1.jpg" alt="" /><span class="year-chip">2021</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2021_12_25_16_04_IMG_0470 1.jpg" alt="" /><span class="year-chip">2021</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2021_12_25_16_12_IMG_0446 1.jpg" alt="" /><span class="year-chip">2021</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2021_12_25_16_57_IMG_0449 1.jpg" alt="" /><span class="year-chip">2021</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2022_01_07_14_59_IMG_0655 1.jpg" alt="" /><span class="year-chip">2022</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2022_01_10_16_34_IMG_0700 1.jpg" alt="" /><span class="year-chip">2022</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2022_01_21_00_18_IMG_1043 1.jpg" alt="" /><span class="year-chip">2022</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2022_05_01_15_42_IMG_2627 1.jpg" alt="" /><span class="year-chip">2022</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2022_05_01_17_37_IMG_2651 1.jpg" alt="" /><span class="year-chip">2022</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2022_05_01_18_25_IMG_2658 1.jpg" alt="" /><span class="year-chip">2022</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2022_05_15_15_42_IMG_2739 1.jpg" alt="" /><span class="year-chip">2022</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2022_05_15_16_51_IMG_2844 1.jpg" alt="" /><span class="year-chip">2022</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_16_16_08_IMG_2987 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_16_16_23_IMG_3014 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_16_16_24_IMG_3020 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_16_16_28_IMG_3029 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_16_16_29_IMG_3033 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_16_16_37_IMG_3064 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_16_16_39_IMG_3084 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_16_16_42_IMG_3120 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_18_01_22_IMG_3310 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_18_01_48_IMG_3375 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_18_01_51_IMG_3374 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_18_17_28_IMG_3392 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_18_20_05_IMG_3503 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_18_20_31_IMG_3534 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_06_18_20_52_IMG_3588 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_12_20_18_59_IMG_2476 1.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2024_12_20_18_59_IMG_2476 2.jpg" alt="" /><span class="year-chip">2024</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2025_01_17_20_56_IMG_3007 1.jpg" alt="" /><span class="year-chip">2025</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2025_01_17_23_07_IMG_3012 1.jpg" alt="" /><span class="year-chip">2025</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2025_01_17_23_32_IMG_3014 1.jpg" alt="" /><span class="year-chip">2025</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2025_01_18_12_27_IMG_3024 1.jpg" alt="" /><span class="year-chip">2025</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2025_01_18_21_54_IMG_3067 1.jpg" alt="" /><span class="year-chip">2025</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2025_01_18_22_38_IMG_3109 1.jpg" alt="" /><span class="year-chip">2025</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2025_01_18_23_22_IMG_3263 1.jpg" alt="" /><span class="year-chip">2025</span></div></div>
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2025_05_01_01_03_IMG_4991 1.jpg" alt="" /><span class="year-chip">2025</span></div></div>
+                <!-- clone: first -->
+                <div class="carousel__slide"><div class="carousel__slide__inner"><img src="assets/memory_Pic/2021_11_14_15_55_IMG_0068 1.jpg" alt="" /><span class="year-chip">2021</span></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="section-4__bottom">
+            <div class="section-4__tooltip" id="sec4Tooltip">
+              <img src="assets/Page_asset/tooltip3.svg" alt="툴팁" height="30" />
             </div>
           </div>
         </div>
@@ -610,6 +772,80 @@
         });
       }
 
+    })();
+  </script>
+
+  <!-- Section 4 Carousel -->
+  <script>
+    (function () {
+      const carousel = document.getElementById('sec4Carousel');
+      if (!carousel) return;
+
+      const track  = carousel.querySelector('.carousel__track');
+      const slides = carousel.querySelectorAll('.carousel__slide');
+      const total  = slides.length; // 44 (0=clone-last, 1-42=real, 43=clone-first)
+      const REAL   = total - 2;     // 42
+
+      let current  = 1;
+      let autoTimer = null;
+
+      function setTranslate(index, animate) {
+        track.style.transition = animate
+          ? 'transform 0.4s ease'
+          : 'none';
+        track.style.transform = `translateX(calc(-${index} * 100%))`;
+      }
+
+      // 초기 위치 (애니메이션 없이)
+      setTranslate(current, false);
+
+      // transitionend: clone 경계에서 순간 점프
+      track.addEventListener('transitionend', () => {
+        if (current === 0) {
+          current = REAL;
+          setTranslate(current, false);
+        } else if (current === total - 1) {
+          current = 1;
+          setTranslate(current, false);
+        }
+      });
+
+      function next() { current++; setTranslate(current, true); }
+      function prev() { current--; setTranslate(current, true); }
+
+      // 자동 넘김 (3초)
+      function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(next, 3000);
+      }
+      function stopAuto() {
+        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+      }
+
+      startAuto();
+
+      // 터치 스와이프 (가로) — 세로 스와이프는 페이지 스냅으로 버블링
+      let txStart = 0, tyStart = 0, dragging = false;
+
+      carousel.addEventListener('touchstart', (e) => {
+        txStart  = e.touches[0].clientX;
+        tyStart  = e.touches[0].clientY;
+        dragging = true;
+      }, { passive: true });
+
+      carousel.addEventListener('touchend', (e) => {
+        if (!dragging) return;
+        dragging = false;
+        const dx = txStart - e.changedTouches[0].clientX;
+        const dy = tyStart - e.changedTouches[0].clientY;
+        // 가로 스와이프가 세로보다 크고 40px 이상일 때만 처리
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+          e.stopPropagation();
+          stopAuto();
+          if (dx > 0) next(); else prev();
+          startAuto();
+        }
+      }, { passive: true });
     })();
   </script>
 
