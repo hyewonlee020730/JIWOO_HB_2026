@@ -636,14 +636,6 @@
           source   = ctx.createMediaStreamSource(stream);
           source.connect(analyser);
           data = new Uint8Array(analyser.frequencyBinCount);
-
-          // BGM <audio> 요소를 같은 AudioContext에 연결 (iOS 오디오 세션 충돌 방지)
-          const bgmEl = document.getElementById('bgm');
-          if (bgmEl && !bgmEl._acConnected) {
-            bgmEl._acConnected = true;
-            const bgmNode = ctx.createMediaElementSource(bgmEl);
-            bgmNode.connect(ctx.destination);
-          }
         }
 
         ctx.resume().then(() => {
@@ -785,8 +777,6 @@
 
       if (sec2Btn) {
         sec2Btn.addEventListener('click', () => {
-          const bgm = document.getElementById('bgm');
-          if (bgm) sessionStorage.setItem('bgm_time', bgm.currentTime);
           window.location.href = 'card-detail.html';
         });
       }
@@ -865,43 +855,6 @@
           startAuto();
         }
       }, { passive: true });
-    })();
-  </script>
-
-  <!-- 배경 음악 -->
-  <audio id="bgm" src="assets/HB_audio.mp3" loop preload="auto"></audio>
-  <script>
-    (function () {
-      const bgm = document.getElementById('bgm');
-
-      // 이전 페이지에서 저장된 재생 위치 복원
-      const saved = sessionStorage.getItem('bgm_time');
-      if (saved) bgm.currentTime = parseFloat(saved);
-
-      function tryPlay() {
-        bgm.play().catch(() => {});
-      }
-
-      // 데스크탑: 바로 재생 시도
-      tryPlay();
-
-      // 모바일(iOS): 첫 터치에서 재생 시작
-      document.addEventListener('touchstart', tryPlay, { once: true });
-      document.addEventListener('click', tryPlay, { once: true });
-
-      // 페이지 이동 전 재생 위치 저장
-      window.addEventListener('pagehide', () => {
-        sessionStorage.setItem('bgm_time', bgm.currentTime);
-      });
-
-      // bfcache 복원 시 (뒤로가기) 자동 재개
-      window.addEventListener('pageshow', (e) => {
-        if (e.persisted) {
-          tryPlay();
-          document.addEventListener('touchstart', tryPlay, { once: true });
-          document.addEventListener('click', tryPlay, { once: true });
-        }
-      });
     })();
   </script>
 

@@ -106,7 +106,7 @@
 <body>
 
   <header class="gnb">
-    <button class="gnb__back" onclick="const b=document.getElementById('bgm');if(b)sessionStorage.setItem('bgm_time',b.currentTime);history.back()">
+    <button class="gnb__back" onclick="history.back()">
       <img src="assets/Page_asset/arrow-left_icon.svg" alt="뒤로가기" />
     </button>
     <span class="gnb__title">생일 축하 편지</span>
@@ -122,41 +122,6 @@
     <img src="assets/Page_asset/Cut6.png" alt="카드 6" />
     <img src="assets/Page_asset/Cut7.png" alt="카드 7" />
   </main>
-
-  <!-- 배경 음악 (이어서 재생) -->
-  <audio id="bgm" src="assets/HB_audio.mp3" loop preload="auto"></audio>
-  <script>
-    (function () {
-      const bgm = document.getElementById('bgm');
-      const saved = parseFloat(sessionStorage.getItem('bgm_time') || '0');
-
-      function doPlay() {
-        bgm.currentTime = saved;
-        bgm.play().then(() => {
-          // 성공 시 리스너 제거
-          document.removeEventListener('touchend', onGesture);
-          document.removeEventListener('click', onGesture);
-        }).catch(() => {});
-      }
-
-      function onGesture() {
-        document.removeEventListener('touchend', onGesture);
-        document.removeEventListener('click', onGesture);
-        doPlay();
-      }
-
-      // 오디오 로드 완료 여부에 따라 즉시 or 대기
-      if (bgm.readyState >= 1) {
-        doPlay();
-      } else {
-        bgm.addEventListener('loadedmetadata', doPlay, { once: true });
-      }
-
-      // iOS 대비: 제스처 시 재시도
-      document.addEventListener('touchend', onGesture);
-      document.addEventListener('click', onGesture);
-    })();
-  </script>
 
 </body>
 </html>
