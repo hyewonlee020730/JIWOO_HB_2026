@@ -7,13 +7,15 @@
   <style>
     @font-face {
       font-family: 'BMKkubulim';
-      src: url('assets/BMKkubulim.woff2') format('woff2');
+      src: url('assets/BMKkubulim.woff2') format('woff2'),
+           url('assets/BMKkubulimTTF.ttf') format('truetype');
       font-weight: normal;
       font-style: normal;
     }
 
     :root {
       --color-bg: #F9F8F6;
+      --font-size-base: 16px;
     }
 
     * {
@@ -40,7 +42,7 @@
     /* Section 공통 */
     .section {
       width: 100%;
-      height: calc(100dvh - 37px - env(safe-area-inset-top));
+      height: calc(100dvh - 40px - env(safe-area-inset-top));
       scroll-snap-align: start;
     }
 
@@ -60,7 +62,7 @@
 
     .section-1__text {
       font-family: 'BMKkubulim', sans-serif;
-      font-size: 16px;
+      font-size: var(--font-size-base);
       line-height: 1.6;
       color: #000;
       white-space: pre-line;
@@ -88,7 +90,7 @@
       top: 0;
       z-index: 100;
       width: 100%;
-      height: calc(37px + env(safe-area-inset-top));
+      height: calc(40px + env(safe-area-inset-top));
       background-color: var(--color-bg);
       display: flex;
       align-items: center;
