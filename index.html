@@ -671,23 +671,24 @@
     };
     const BLOW_DONE_MS = 4000;
 
-    let blowTimestamp = null;
+    let totalBlowMs  = 0;   // 누적 불기 시간
+    let sessionStart = null; // 현재 세션 시작 시각
     let blowDoneReached = false;
 
     function getCakeEl() { return document.getElementById('sec3Cake'); }
 
     BlowDetector.on('onBlowStart', () => {
-      blowTimestamp = Date.now();
+      sessionStart = Date.now();
       const el = getCakeEl();
       if (el && !blowDoneReached) {
-        // GIF를 처음부터 재생하려면 timestamp 쿼리 추가
         el.src = CAKE.blowing + '?' + Date.now();
       }
     });
 
     BlowDetector.on('onBlow', () => {
-      if (blowDoneReached) return;
-      if (blowTimestamp && Date.now() - blowTimestamp >= BLOW_DONE_MS) {
+      if (blowDoneReached || !sessionStart) return;
+      const elapsed = totalBlowMs + (Date.now() - sessionStart);
+      if (elapsed >= BLOW_DONE_MS) {
         blowDoneReached = true;
         const el = getCakeEl();
         if (el) el.src = CAKE.done;
@@ -700,7 +701,10 @@
     });
 
     BlowDetector.on('onBlowEnd', () => {
-      blowTimestamp = null;
+      if (sessionStart) {
+        totalBlowMs += Date.now() - sessionStart;
+        sessionStart = null;
+      }
       if (!blowDoneReached) {
         const el = getCakeEl();
         if (el) el.src = CAKE.idle;
