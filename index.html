@@ -15,12 +15,30 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    html {
+      height: 100%;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+    }
+
+    body {
       width: 414px;
-      min-height: 896px;
       margin: 0 auto;
       background: #fff;
       font-family: sans-serif;
+    }
+
+    /* Section 공통 */
+    .section {
+      width: 100%;
+      height: 100vh;
+      scroll-snap-align: start;
+      scroll-margin-top: 37px;
+    }
+
+    /* Section 1 */
+    .section-1 {
+      background: #fff;
     }
 
     /* GNB */
@@ -58,6 +76,10 @@
       <img src="assets/Page_asset/menu_icon.svg" alt="Menu" />
     </div>
   </header>
+
+  <main>
+    <section class="section section-1"></section>
+  </main>
 
 </body>
 </html>
