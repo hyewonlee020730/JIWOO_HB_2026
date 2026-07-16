@@ -408,28 +408,17 @@
 
       /* ── 분석 루프 ── */
       function analyze() {
-        analyser.getByteFrequencyData(data);
-        const { lo, hi } = binRange();
-        const count = hi - lo;
-
-        // RMS (입김 에너지)
-        let rmsSum = 0;
-        for (let i = lo; i < hi; i++) rmsSum += data[i] ** 2;
-        const rms = Math.sqrt(rmsSum / count);
-
-        // Spectral Flatness (목소리 vs 입김 구분)
-        // — 입김: 브로드밴드 노이즈 → flatness 높음
-        // — 목소리: 하모닉 피크 → flatness 낮음
-        let logSum = 0, linSum = 0;
-        for (let i = lo; i < hi; i++) {
-          const v = data[i] + 1;
-          logSum += Math.log(v);
-          linSum += v;
+        // 시간 도메인 전체 파형으로 RMS 계산 (128 = 무음)
+        analyser.getByteTimeDomainData(data);
+        let sum = 0;
+        for (let i = 0; i < data.length; i++) {
+          const v = (data[i] - 128) / 128;
+          sum += v * v;
         }
-        const flatness = Math.exp(logSum / count) / (linSum / count);
+        const rms = Math.sqrt(sum / data.length);
 
         const now    = Date.now();
-        const isBlow = rms > 1;
+        const isBlow = rms > 0.01;
 
         if (isBlow && now > cooldownUntil) {
           if (blowStart === null) blowStart = now;
