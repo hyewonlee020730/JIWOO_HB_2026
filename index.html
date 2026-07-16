@@ -386,18 +386,10 @@
 
       const cb = { onBlowStart: null, onBlow: null, onBlowEnd: null };
 
-      /* ── 마이크 권한 요청 ── */
+      /* ── 마이크 권한 요청 (페이지 진입 시) ── */
       async function init() {
         try {
-          stream   = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-          ctx      = new (window.AudioContext || window.webkitAudioContext)();
-          analyser = ctx.createAnalyser();
-          analyser.fftSize               = CFG.fftSize;
-          analyser.smoothingTimeConstant = CFG.smoothing;
-          source   = ctx.createMediaStreamSource(stream);
-          source.connect(analyser);
-          data = new Uint8Array(analyser.frequencyBinCount);
-          ctx.suspend();
+          stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
         } catch (e) {
           state = (e.name === 'NotAllowedError') ? 'denied' : 'error';
           console.warn('[BlowDetector] init failed:', e.name);
@@ -460,7 +452,19 @@
 
       /* ── 외부 API ── */
       function start() {
-        if (!ctx || state === 'denied' || state === 'error') return;
+        if (!stream || state === 'denied' || state === 'error') return;
+
+        // AudioContext를 터치 이벤트 시점에 생성 (iOS Safari 정책 대응)
+        if (!ctx) {
+          ctx      = new (window.AudioContext || window.webkitAudioContext)();
+          analyser = ctx.createAnalyser();
+          analyser.fftSize               = CFG.fftSize;
+          analyser.smoothingTimeConstant = CFG.smoothing;
+          source   = ctx.createMediaStreamSource(stream);
+          source.connect(analyser);
+          data = new Uint8Array(analyser.frequencyBinCount);
+        }
+
         ctx.resume().then(() => {
           state     = 'listening';
           blowStart = null;
