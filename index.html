@@ -858,5 +858,25 @@
     })();
   </script>
 
+  <!-- 배경 음악 -->
+  <audio id="bgm" src="assets/HB_audio.mp3" loop preload="auto"></audio>
+  <script>
+    (function () {
+      const bgm = document.getElementById('bgm');
+
+      // 데스크탑: 바로 재생 시도
+      bgm.play().catch(() => {});
+
+      // 모바일(iOS): 첫 터치에서 재생 시작
+      function unlockAudio() {
+        bgm.play().catch(() => {});
+        document.removeEventListener('touchstart', unlockAudio);
+        document.removeEventListener('click', unlockAudio);
+      }
+      document.addEventListener('touchstart', unlockAudio, { once: true });
+      document.addEventListener('click', unlockAudio, { once: true });
+    })();
+  </script>
+
 </body>
 </html>
