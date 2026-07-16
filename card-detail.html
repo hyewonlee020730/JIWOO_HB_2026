@@ -106,7 +106,7 @@
 <body>
 
   <header class="gnb">
-    <button class="gnb__back" onclick="history.back()">
+    <button class="gnb__back" onclick="const b=document.getElementById('bgm');if(b)sessionStorage.setItem('bgm_time',b.currentTime);history.back()">
       <img src="assets/Page_asset/arrow-left_icon.svg" alt="뒤로가기" />
     </button>
     <span class="gnb__title">생일 축하 편지</span>
@@ -129,19 +129,21 @@
     (function () {
       const bgm = document.getElementById('bgm');
 
-      const saved = sessionStorage.getItem('bgm_time');
-      if (saved) bgm.currentTime = parseFloat(saved);
-
-      bgm.play().catch(() => {});
-
-      function unlockAudio() {
+      function startBgm() {
+        const saved = sessionStorage.getItem('bgm_time');
+        if (saved) bgm.currentTime = parseFloat(saved);
         bgm.play().catch(() => {});
       }
-      document.addEventListener('touchstart', unlockAudio, { once: true });
-      document.addEventListener('click', unlockAudio, { once: true });
 
-      window.addEventListener('pagehide', () => {
-        sessionStorage.setItem('bgm_time', bgm.currentTime);
+      // 바로 시도 (데스크탑 or 이미 권한 있는 경우)
+      startBgm();
+
+      // iOS 대비: 첫 터치/스크롤에서 재생
+      ['touchstart', 'touchend', 'click', 'scroll'].forEach(evt => {
+        document.addEventListener(evt, function handler() {
+          bgm.play().catch(() => {});
+          document.removeEventListener(evt, handler);
+        }, { once: true, passive: true });
       });
     })();
   </script>

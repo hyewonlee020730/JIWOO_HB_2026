@@ -777,6 +777,8 @@
 
       if (sec2Btn) {
         sec2Btn.addEventListener('click', () => {
+          const bgm = document.getElementById('bgm');
+          if (bgm) sessionStorage.setItem('bgm_time', bgm.currentTime);
           window.location.href = 'card-detail.html';
         });
       }
