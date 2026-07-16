@@ -864,6 +864,10 @@
     (function () {
       const bgm = document.getElementById('bgm');
 
+      // 이전 페이지에서 저장된 재생 위치 복원
+      const saved = sessionStorage.getItem('bgm_time');
+      if (saved) bgm.currentTime = parseFloat(saved);
+
       // 데스크탑: 바로 재생 시도
       bgm.play().catch(() => {});
 
@@ -875,6 +879,11 @@
       }
       document.addEventListener('touchstart', unlockAudio, { once: true });
       document.addEventListener('click', unlockAudio, { once: true });
+
+      // 페이지 이동 전 재생 위치 저장
+      window.addEventListener('pagehide', () => {
+        sessionStorage.setItem('bgm_time', bgm.currentTime);
+      });
     })();
   </script>
 

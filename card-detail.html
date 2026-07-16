@@ -123,5 +123,28 @@
     <img src="assets/Page_asset/Cut7.png" alt="카드 7" />
   </main>
 
+  <!-- 배경 음악 (이어서 재생) -->
+  <audio id="bgm" src="assets/HB_audio.mp3" loop preload="auto"></audio>
+  <script>
+    (function () {
+      const bgm = document.getElementById('bgm');
+
+      const saved = sessionStorage.getItem('bgm_time');
+      if (saved) bgm.currentTime = parseFloat(saved);
+
+      bgm.play().catch(() => {});
+
+      function unlockAudio() {
+        bgm.play().catch(() => {});
+      }
+      document.addEventListener('touchstart', unlockAudio, { once: true });
+      document.addEventListener('click', unlockAudio, { once: true });
+
+      window.addEventListener('pagehide', () => {
+        sessionStorage.setItem('bgm_time', bgm.currentTime);
+      });
+    })();
+  </script>
+
 </body>
 </html>
