@@ -371,7 +371,7 @@
         smoothing:            0.5,
         blowThreshold:        38,   // RMS 임계값 (0~255)
         spectralFlatness:     0.28, // 1에 가까울수록 noise, 0에 가까울수록 tonal
-        minDuration:          180,  // ms — 입김 최소 지속 시간
+        minDuration:          80,   // ms — 입김 최소 지속 시간
         cooldown:             800,  // ms — 감지 후 대기 시간
         freqLow:              80,   // Hz — 입김 주파수 하한
         freqHigh:             1200, // Hz — 입김 주파수 상한
@@ -429,7 +429,7 @@
         const flatness = Math.exp(logSum / count) / (linSum / count);
 
         const now    = Date.now();
-        const isBlow = rms > 5; // 테스트용 — 소리 감지 여부 확인
+        const isBlow = rms > 3;
 
         if (isBlow && now > cooldownUntil) {
           if (blowStart === null) blowStart = now;
