@@ -520,6 +520,11 @@
         blowDoneReached = true;
         const el = getCakeEl();
         if (el) el.src = CAKE.done;
+        const tooltip = document.getElementById('sec3Tooltip');
+        if (tooltip) {
+          const img = tooltip.querySelector('img');
+          if (img) img.src = 'assets/Page_asset/tooltip2-2.svg';
+        }
       }
     });
 
