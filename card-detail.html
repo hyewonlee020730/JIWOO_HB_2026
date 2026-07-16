@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>생일 축하카드 상세보기</title>
+  <style>
+    @font-face {
+      font-family: 'BMKkubulim';
+      src: url('assets/BMKkubulim.woff2') format('woff2'),
+           url('assets/BMKkubulimTTF.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    :root {
+      --color-bg: #F9F8F6;
+      --font-size-base: 16px;
+      --gnb-height: calc(40px + env(safe-area-inset-top));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100dvh;
+    }
+
+    body {
+      width: 100%;
+      min-width: 375px;
+      max-width: 390px;
+      margin: 0 auto;
+      font-family: sans-serif;
+      background: var(--color-bg);
+    }
+
+    /* GNB */
+    .gnb {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: 100%;
+      max-width: 390px;
+      min-width: 375px;
+      height: var(--gnb-height);
+      background-color: var(--color-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: env(safe-area-inset-top) 15px 0 15px;
+    }
+
+    .gnb__back {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      flex: 0 0 20px;
+    }
+
+    .gnb__back img {
+      display: block;
+      height: 20px;
+      width: auto;
+    }
+
+    .gnb__title {
+      flex: 1;
+      font-family: 'BMKkubulim', sans-serif;
+      font-size: var(--font-size-base);
+      color: #000;
+      text-align: center;
+    }
+
+    .gnb__spacer {
+      flex: 0 0 20px;
+    }
+
+    /* 콘텐츠 */
+    .content {
+      padding-top: var(--gnb-height);
+      width: 100%;
+      min-height: 100dvh;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="gnb">
+    <button class="gnb__back" onclick="history.back()">
+      <img src="assets/Page_asset/arrow-left_icon.svg" alt="뒤로가기" />
+    </button>
+    <span class="gnb__title">카드 상세보기</span>
+    <div class="gnb__spacer"></div>
+  </header>
+
+  <main class="content">
+  </main>
+
+</body>
+</html>
