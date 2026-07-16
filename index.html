@@ -636,6 +636,14 @@
           source   = ctx.createMediaStreamSource(stream);
           source.connect(analyser);
           data = new Uint8Array(analyser.frequencyBinCount);
+
+          // BGM <audio> 요소를 같은 AudioContext에 연결 (iOS 오디오 세션 충돌 방지)
+          const bgmEl = document.getElementById('bgm');
+          if (bgmEl && !bgmEl._acConnected) {
+            bgmEl._acConnected = true;
+            const bgmNode = ctx.createMediaElementSource(bgmEl);
+            bgmNode.connect(ctx.destination);
+          }
         }
 
         ctx.resume().then(() => {
