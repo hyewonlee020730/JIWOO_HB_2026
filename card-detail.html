@@ -128,30 +128,33 @@
   <script>
     (function () {
       const bgm = document.getElementById('bgm');
-      let played = false;
+      const saved = parseFloat(sessionStorage.getItem('bgm_time') || '0');
 
-      function play() {
-        if (played) return;
-        played = true;
-        const saved = parseFloat(sessionStorage.getItem('bgm_time') || '0');
-        // 오디오 로드 후 currentTime 설정
-        if (bgm.readyState >= 1) {
-          bgm.currentTime = saved;
-          bgm.play().catch(() => {});
-        } else {
-          bgm.addEventListener('loadedmetadata', () => {
-            bgm.currentTime = saved;
-            bgm.play().catch(() => {});
-          }, { once: true });
-        }
+      function doPlay() {
+        bgm.currentTime = saved;
+        bgm.play().then(() => {
+          // 성공 시 리스너 제거
+          document.removeEventListener('touchend', onGesture);
+          document.removeEventListener('click', onGesture);
+        }).catch(() => {});
       }
 
-      // 데스크탑: 바로 시도
-      play();
+      function onGesture() {
+        document.removeEventListener('touchend', onGesture);
+        document.removeEventListener('click', onGesture);
+        doPlay();
+      }
 
-      // iOS: 첫 touchend / click 에서 재생 (가장 신뢰도 높은 제스처)
-      document.addEventListener('touchend', play, { once: true });
-      document.addEventListener('click',    play, { once: true });
+      // 오디오 로드 완료 여부에 따라 즉시 or 대기
+      if (bgm.readyState >= 1) {
+        doPlay();
+      } else {
+        bgm.addEventListener('loadedmetadata', doPlay, { once: true });
+      }
+
+      // iOS 대비: 제스처 시 재시도
+      document.addEventListener('touchend', onGesture);
+      document.addEventListener('click', onGesture);
     })();
   </script>
 
