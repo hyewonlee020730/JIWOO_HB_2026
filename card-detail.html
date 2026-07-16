@@ -15,6 +15,7 @@
 
     :root {
       --color-bg: #F9F8F6;
+      --color-bg2: #FFFFFF;
       --font-size-base: 16px;
       --gnb-height: calc(40px + env(safe-area-inset-top));
     }
@@ -35,7 +36,7 @@
       max-width: 390px;
       margin: 0 auto;
       font-family: sans-serif;
-      background: var(--color-bg);
+      background: var(--color-bg2);
     }
 
     /* GNB */
@@ -49,7 +50,7 @@
       max-width: 390px;
       min-width: 375px;
       height: var(--gnb-height);
-      background-color: var(--color-bg);
+      background-color: var(--color-bg2);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -86,9 +87,19 @@
 
     /* 콘텐츠 */
     .content {
-      padding-top: var(--gnb-height);
+      margin-top: var(--gnb-height);
       width: 100%;
-      min-height: 100dvh;
+      height: calc(100dvh - var(--gnb-height));
+      overflow-y: auto;
+      padding: 0 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .content img {
+      display: block;
+      width: 100%;
     }
   </style>
 </head>
@@ -103,6 +114,13 @@
   </header>
 
   <main class="content">
+    <img src="assets/Page_asset/Cut1.png" alt="카드 1" />
+    <img src="assets/Page_asset/Cut2.png" alt="카드 2" />
+    <img src="assets/Page_asset/Cut3.png" alt="카드 3" />
+    <img src="assets/Page_asset/Cut4.png" alt="카드 4" />
+    <img src="assets/Page_asset/Cut5.png" alt="카드 5" />
+    <img src="assets/Page_asset/Cut6.png" alt="카드 6" />
+    <img src="assets/Page_asset/Cut7.png" alt="카드 7" />
   </main>
 
 </body>
