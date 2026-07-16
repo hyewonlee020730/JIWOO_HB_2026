@@ -429,7 +429,7 @@
         const flatness = Math.exp(logSum / count) / (linSum / count);
 
         const now    = Date.now();
-        const isBlow = rms > CFG.blowThreshold && flatness > CFG.spectralFlatness;
+        const isBlow = rms > 5; // 테스트용 — 소리 감지 여부 확인
 
         if (isBlow && now > cooldownUntil) {
           if (blowStart === null) blowStart = now;
