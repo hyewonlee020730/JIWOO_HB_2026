@@ -216,6 +216,71 @@
 
     .section-2__btn:active .btn-bg  { fill: #DBF6FF; }
     .section-2__btn:active .btn-text { fill: #505050; }
+
+    /* Section 3 */
+    .section-3 {
+      background: var(--color-bg);
+    }
+
+    .section-3__frame {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px 0 calc(30px + env(safe-area-inset-bottom)) 0;
+    }
+
+    .section-3__text {
+      font-family: 'BMKkubulim', sans-serif;
+      font-size: var(--font-size-base);
+      line-height: 1.6;
+      color: #000;
+      white-space: pre-line;
+      text-align: center;
+    }
+
+    .section-3__card {
+      padding: 0 30px;
+      perspective: 1000px;
+    }
+
+    .section-3__bottom {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-3__tooltip {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 18px;
+      height: 80px;
+    }
+
+    .section-3__tooltip img {
+      display: block;
+      height: 32px;
+      width: auto;
+    }
+
+    .section-3__btn {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 0 18px;
+      height: 80px;
+    }
+
+    .section-3__btn svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+
+    .section-3__btn:active .btn-bg  { fill: #DBF6FF; }
+    .section-3__btn:active .btn-text { fill: #505050; }
   </style>
 </head>
 <body>
@@ -262,6 +327,33 @@
               <img src="assets/Page_asset/tooltip.svg" alt="카드를 눌러봐!" height="32" />
             </div>
             <div class="section-2__btn" id="sec2Btn">
+              <svg width="756" height="100" viewBox="0 0 756 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="btn-bg" d="M0 18.0615C0 8.08642 8.08642 0 18.0615 0H737.692C747.667 0 755.754 8.08642 755.754 18.0615V81.2769C755.754 91.252 747.667 99.3384 737.692 99.3384H18.0615C8.0864 99.3384 0 91.252 0 81.2769V18.0615Z" fill="#A8D6E6"/>
+                <path class="btn-text" d="M349.572 57.4289V59.8674H324.261V57.4289H335.404V51.7494H327.163V37.5198H330.095V42.2733H343.676V37.5198H346.578V51.7494H338.306V57.4289H349.572ZM330.095 49.3727H343.676V44.65H330.095V49.3727ZM374.605 35.6369V63.3553H371.704V48.4775H366.641V46.039H371.704V35.6369H374.605ZM365.005 38.1371V48.0145H355.529V54.3113C359.943 54.2959 363.339 54.1416 367.197 53.4471L367.444 55.8547C363.308 56.5955 359.666 56.7498 354.789 56.7807H352.597V45.6378H362.166V40.5139H352.535V38.1371H365.005ZM400.441 35.6369V46.6564H404.731V49.0948H400.441V63.2627H397.508V35.6369H400.441ZM393.218 38.5384C393.187 46.5329 389.668 53.6631 380.562 58.1697L378.926 55.8856C385.856 52.4285 389.622 47.428 390.224 40.9769H380.315V38.5384H393.218ZM429.209 35.6369V63.2936H426.245V35.6369H429.209ZM420.967 38.6001C420.967 46.6872 417.51 53.7249 408.034 58.2623L406.491 55.8856C413.852 52.3822 417.433 47.3972 418.004 40.946H407.818V38.6001H420.967Z" fill="black"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section section-3">
+        <div class="section-3__frame">
+          <div class="section-3__text">케이크에
+촛불을 불면서 소원을 빌어봐!</div>
+          <div class="section-3__card">
+            <div class="card-flip" id="sec3Card">
+              <div class="card-flip__front">
+                <img src="assets/Page_asset/cake_img1.png" alt="카드 앞면" />
+              </div>
+              <div class="card-flip__back">
+                <img src="" alt="카드 뒷면" />
+              </div>
+            </div>
+          </div>
+          <div class="section-3__bottom">
+            <div class="section-3__tooltip" id="sec3Tooltip">
+              <img src="assets/Page_asset/tooltip2.png" alt="카드를 눌러봐!" height="32" />
+            </div>
+            <div class="section-3__btn" id="sec3Btn">
               <svg width="756" height="100" viewBox="0 0 756 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path class="btn-bg" d="M0 18.0615C0 8.08642 8.08642 0 18.0615 0H737.692C747.667 0 755.754 8.08642 755.754 18.0615V81.2769C755.754 91.252 747.667 99.3384 737.692 99.3384H18.0615C8.0864 99.3384 0 91.252 0 81.2769V18.0615Z" fill="#A8D6E6"/>
                 <path class="btn-text" d="M349.572 57.4289V59.8674H324.261V57.4289H335.404V51.7494H327.163V37.5198H330.095V42.2733H343.676V37.5198H346.578V51.7494H338.306V57.4289H349.572ZM330.095 49.3727H343.676V44.65H330.095V49.3727ZM374.605 35.6369V63.3553H371.704V48.4775H366.641V46.039H371.704V35.6369H374.605ZM365.005 38.1371V48.0145H355.529V54.3113C359.943 54.2959 363.339 54.1416 367.197 53.4471L367.444 55.8547C363.308 56.5955 359.666 56.7498 354.789 56.7807H352.597V45.6378H362.166V40.5139H352.535V38.1371H365.005ZM400.441 35.6369V46.6564H404.731V49.0948H400.441V63.2627H397.508V35.6369H400.441ZM393.218 38.5384C393.187 46.5329 389.668 53.6631 380.562 58.1697L378.926 55.8856C385.856 52.4285 389.622 47.428 390.224 40.9769H380.315V38.5384H393.218ZM429.209 35.6369V63.2936H426.245V35.6369H429.209ZM420.967 38.6001C420.967 46.6872 417.51 53.7249 408.034 58.2623L406.491 55.8856C413.852 52.3822 417.433 47.3972 418.004 40.946H407.818V38.6001H420.967Z" fill="black"/>
@@ -335,6 +427,7 @@
           window.location.href = 'card-detail.html';
         });
       }
+
     })();
   </script>
 
