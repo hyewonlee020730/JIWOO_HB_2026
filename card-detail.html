@@ -128,23 +128,30 @@
   <script>
     (function () {
       const bgm = document.getElementById('bgm');
+      let played = false;
 
-      function startBgm() {
-        const saved = sessionStorage.getItem('bgm_time');
-        if (saved) bgm.currentTime = parseFloat(saved);
-        bgm.play().catch(() => {});
+      function play() {
+        if (played) return;
+        played = true;
+        const saved = parseFloat(sessionStorage.getItem('bgm_time') || '0');
+        // 오디오 로드 후 currentTime 설정
+        if (bgm.readyState >= 1) {
+          bgm.currentTime = saved;
+          bgm.play().catch(() => {});
+        } else {
+          bgm.addEventListener('loadedmetadata', () => {
+            bgm.currentTime = saved;
+            bgm.play().catch(() => {});
+          }, { once: true });
+        }
       }
 
-      // 바로 시도 (데스크탑 or 이미 권한 있는 경우)
-      startBgm();
+      // 데스크탑: 바로 시도
+      play();
 
-      // iOS 대비: 첫 터치/스크롤에서 재생
-      ['touchstart', 'touchend', 'click', 'scroll'].forEach(evt => {
-        document.addEventListener(evt, function handler() {
-          bgm.play().catch(() => {});
-          document.removeEventListener(evt, handler);
-        }, { once: true, passive: true });
-      });
+      // iOS: 첫 touchend / click 에서 재생 (가장 신뢰도 높은 제스처)
+      document.addEventListener('touchend', play, { once: true });
+      document.addEventListener('click',    play, { once: true });
     })();
   </script>
 
